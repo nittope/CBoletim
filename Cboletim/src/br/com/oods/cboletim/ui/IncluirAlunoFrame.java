@@ -21,6 +21,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 /**
  *
  * @author Vinicius
@@ -29,7 +30,7 @@ public class IncluirAlunoFrame extends JFrame{
         
     private JTextField tfNome;    
     private JComboBox combosexo;
-    private JTextField tfDatanascimento;
+    private JFormattedTextField tfDatanascimento;
     private JTextField tfNomemae;
     private JTextField tfNomepai;
     private JTextField tfEndereco;
@@ -104,7 +105,7 @@ public class IncluirAlunoFrame extends JFrame{
                 
 		tfNome = new JTextField();
                 combosexo = new JComboBox();
-                tfDatanascimento = new JTextField();
+                tfDatanascimento = new JFormattedTextField(FormatoMascaraCampo());
                 tfNomemae = new JTextField();
                 tfNomepai = new JTextField();
 		tfEndereco = new JTextField();
@@ -122,7 +123,7 @@ public class IncluirAlunoFrame extends JFrame{
                 combosexo.addItem("FEMININO");
                 painelEditarAluno.add(combosexo);
                 painelEditarAluno.add(new JLabel("Data de Nascimento:"));
-		painelEditarAluno.add(tfDatanascimento);
+		painelEditarAluno.add(tfDatanascimento);                
                 painelEditarAluno.add(new JLabel("Nome da Mãe:"));
 		painelEditarAluno.add(tfNomemae);
                 painelEditarAluno.add(new JLabel("Nome do Pai:"));
@@ -261,4 +262,21 @@ public class IncluirAlunoFrame extends JFrame{
 			}
 		}
 	}
+        public static MaskFormatter FormatoMascaraCampo() {  
+  
+            
+            MaskFormatter formato = new MaskFormatter();  
+  
+            try{        
+                formato.setMask("##-##-####");  
+                formato.setPlaceholderCharacter('_'); 
+                
+            } 
+            
+            catch (Exception ex) {  
+                 ex.printStackTrace();  
+            }  
+            return formato;  
+        } 
+   
 }
