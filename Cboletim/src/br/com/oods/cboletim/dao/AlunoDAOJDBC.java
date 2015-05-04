@@ -106,7 +106,7 @@ public class AlunoDAOJDBC  implements AlunoDAO{
 
     @Override
     public void remove(Aluno a) throws PersistenceException {
-            if (a == null || a.getId_pessoa()== null) {
+            if (a == null || a.getNum_matricula()== null) {
                     throw new PersistenceException("Informe o Aluno para exclusao!");
             }
             Connection conn = null;
