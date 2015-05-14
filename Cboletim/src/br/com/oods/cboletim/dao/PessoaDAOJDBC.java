@@ -183,7 +183,7 @@ public class PessoaDAOJDBC implements PessoaDAO {
                     ConnectionManager.closeAll(conn, stmt, rs);
             }
     }
-
+     
     @Override
     @SuppressWarnings("unchecked")
     public List<Pessoa> getPessoaByNome(String nome_pessoa) throws PersistenceException {

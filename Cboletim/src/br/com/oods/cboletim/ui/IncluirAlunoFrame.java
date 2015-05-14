@@ -41,6 +41,7 @@ public class IncluirAlunoFrame extends JFrame{
     protected JButton bExcluir;	
     private ListaAlunosFrame framePrincipal;
     
+    
     public IncluirAlunoFrame(ListaAlunosFrame framePrincipal) {
 		this.framePrincipal = framePrincipal;
 		setTitle("Incluir Aluno");
