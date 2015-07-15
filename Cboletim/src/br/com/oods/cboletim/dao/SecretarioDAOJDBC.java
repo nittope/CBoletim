@@ -260,8 +260,11 @@ public class SecretarioDAOJDBC implements SecretarioDAO {
                 String sexo = rs.getString("sexo");
                 String endereco = rs.getString("endereco");
                 String fone = rs.getString("fone");
+                String login = rs.getString("login");
+                String senha = rs.getString("senha");
+                
 
-                listaps.add(new Pessoa(id_pessoa, tipoacesso_pessoa, nome_pessoa, sexo, endereco, fone));
+                listaps.add(new Pessoa(id_pessoa, tipoacesso_pessoa, nome_pessoa, sexo, endereco, fone, login, senha));
             }
             return listaps;
     }

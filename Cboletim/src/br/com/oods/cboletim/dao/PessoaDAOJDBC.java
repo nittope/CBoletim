@@ -27,10 +27,10 @@ import br.com.oods.cboletim.model.Pessoa;
 public class PessoaDAOJDBC implements PessoaDAO {
 
     //comandos SQL utilizados pelo DAO.
-    private final static String INSERT_PESSOA = "INSERT INTO pessoa (tipoacesso_pessoa,nome_pessoa,sexo,endereco,fone) VALUES (?,?,?,?,?)";
-    private final static String UPDATE_PESSOA = "UPDATE pessoa SET tipoacesso_pessoa = ?,nome_pessoa = ?,sexo = ?,endereco = ?,fone = ? WHERE id_pessoa = ?";
+    private final static String INSERT_PESSOA = "INSERT INTO pessoa (tipoacesso_pessoa,nome_pessoa,sexo,endereco,fone,login,senha) VALUES (?,?,?,?,?,?,?)";
+    private final static String UPDATE_PESSOA = "UPDATE pessoa SET tipoacesso_pessoa = ?,nome_pessoa = ?,sexo = ?,endereco = ?,fone = ?, login = ?, senha = ? WHERE id_pessoa = ?";
     private final static String DELETE_PESSOA = "DELETE FROM pessoa WHERE id_pessoa = ?";
-    private final static String GET_ALL_PESSOAS = "SELECT * FROM pessoa";
+    public final static String GET_ALL_PESSOAS = "SELECT * FROM pessoa";
     private final static String GET_PESSOAS_BY_NOME_PESSOA = "SELECT * FROM pessoa WHERE nome_pessoa like ?";
     private final static String GET_PESSOA_BY_ID_PESSOA = "SELECT * FROM pessoa WHERE id_pessoa = ?";
 
@@ -90,6 +90,8 @@ public class PessoaDAOJDBC implements PessoaDAO {
             stmt.setString(3, p.getSexo());
             stmt.setString(4, p.getEndereco());
             stmt.setString(5, p.getFone());
+            stmt.setString(6, p.getLogin());
+            stmt.setString(7, p.getSenha());
             return stmt;
     }
 
@@ -100,7 +102,9 @@ public class PessoaDAOJDBC implements PessoaDAO {
             stmt.setString(3, p.getSexo());
             stmt.setString(4, p.getEndereco());
             stmt.setString(5, p.getFone());
-            stmt.setInt(6, p.getId_pessoa());
+            stmt.setString(6, p.getLogin());
+            stmt.setString(7, p.getSenha());
+            stmt.setInt(8, p.getId_pessoa());
             return stmt;
     }
 
@@ -150,8 +154,11 @@ public class PessoaDAOJDBC implements PessoaDAO {
                             String sexo = rs.getString("sexo");
                             String endereco = rs.getString("endereco");
                             String fone = rs.getString("fone");
+                            String login = rs.getString("login");
+                            String senha = rs.getString("senha");
 
-                            p = new Pessoa(id_pessoa, tipoacesso_pessoa, nome_pessoa, sexo, endereco, fone);
+
+                            p = new Pessoa(id_pessoa, tipoacesso_pessoa, nome_pessoa, sexo, endereco, fone, login, senha);
                     }
                     return p;
             } catch (SQLException e) {
@@ -220,13 +227,16 @@ public class PessoaDAOJDBC implements PessoaDAO {
                     String sexo = rs.getString("sexo");
                     String endereco = rs.getString("endereco");
                     String fone = rs.getString("fone");
+                    String login = rs.getString("login");
+                    String senha = rs.getString("senha");
 
-                    lista.add(new Pessoa(id_pessoa, tipoacesso_pessoa, nome_pessoa, sexo, endereco, fone));
+
+                    lista.add(new Pessoa(id_pessoa, tipoacesso_pessoa, nome_pessoa, sexo, endereco, fone, login, senha));
             }
             return lista;
     }
 
-    private static PreparedStatement createStatementWithLog(Connection conn, String sql) throws SQLException{
+    public static PreparedStatement createStatementWithLog(Connection conn, String sql) throws SQLException{
             if (conn == null)
                     return null;
 

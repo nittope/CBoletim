@@ -79,10 +79,15 @@ public class ListarTipoSecretarioFrame extends JFrame {
 		public void mouseClicked(MouseEvent event) {
 			if (event.getClickCount() == 2) {
 				Pessoa p = tabelapessoatiposecretario.getPessoaSelected();
-				if (p != null) {
-                                    
-					editarFrame.setAluno(a);
-					editarFrame.setVisible(true);
+				if (p != null) {                                    
+					//p.setId_pessoa(p.getId_pessoa());
+                                        IncluirSecretarioFrame frm = null;
+                                        frm.exportarUsuario(p);
+                                        ListarTipoSecretarioFrame.this.dispose();
+                                        frm.setVisible(true);
+                                        
+                                        
+                                        
 				}
 			}
 		}

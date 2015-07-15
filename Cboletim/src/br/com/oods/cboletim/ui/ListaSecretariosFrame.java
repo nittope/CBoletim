@@ -34,8 +34,8 @@ public class ListaSecretariosFrame extends JFrame {
     private JButton bAtualizaLista;
     
     private IncluirSecretarioFrame incluirFrame;
-    private EditarSecretarioFrame editarFrame;
-    private BuscaSecretarioFrame buscaFrame;
+    //private EditarSecretarioFrame editarFrame;
+    //private BuscaSecretarioFrame buscaFrame;
     
     public ListaSecretariosFrame() {
 	setTitle("Lista de Secretários");
@@ -73,8 +73,8 @@ public class ListaSecretariosFrame extends JFrame {
 		
 		
 	incluirFrame = new IncluirSecretarioFrame(this);
-	editarFrame = new EditarSecretarioFrame(this);
-	buscaFrame = new BuscaSecretarioFrame(this);
+	//editarFrame = new EditarSecretarioFrame(this);
+	//buscaFrame = new BuscaSecretarioFrame(this);
 		
 	inicializaDB();
 	}
@@ -141,8 +141,8 @@ public class ListaSecretariosFrame extends JFrame {
             if (event.getClickCount() == 2) {
                 Secretario s = tabela.getSecretarioSelected();
                 if (s != null) {
-                    editarFrame.setPessoa(s);
-                    editarFrame.setVisible(true);
+                    //editarFrame.setPessoa(s);
+                    //editarFrame.setVisible(true);
                 }
             }
         }
@@ -151,7 +151,7 @@ public class ListaSecretariosFrame extends JFrame {
     private class BuscarSecretarioListener implements ActionListener {
         @Override
 	public void actionPerformed(ActionEvent event) {
-            buscaFrame.setVisible(true);
+            //buscaFrame.setVisible(true);
 	}
     }
     

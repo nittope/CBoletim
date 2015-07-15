@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioBrancoUsuarios" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="02349d0b-d8b6-4f85-889d-498156a58e23">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="3"/>
+	<queryString language="SQL">
+		<![CDATA[select * from pessoa]]>
+	</queryString>
+	<field name="NOME_PESSOA" class="java.lang.String"/>
+	<field name="SEXO" class="java.lang.String"/>
+	<field name="FONE" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="98" y="28" width="429" height="39" uuid="2f220d8f-0db8-41be-81f7-1875fc5e4cc2"/>
+				<textElement textAlignment="Center">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[CBOLETIM - EDUCANDÁRIO DE PALMARES]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="10" width="529" height="28" uuid="7aa668b1-29c6-4201-80ad-960ade49b7fc"/>
+				<textElement textAlignment="Center">
+					<font size="22"/>
+				</textElement>
+				<text><![CDATA[Lista de Usuários]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="421" y="60" width="80" height="20" uuid="ed853c75-b44a-473d-b07e-5637cb7701de"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="501" y="60" width="40" height="20" uuid="909e2b3c-6582-4c6c-b00e-c077c7ddaee8"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="48" splitType="Stretch">
+			<staticText>
+				<reportElement x="412" y="18" width="100" height="20" uuid="fb4ad95a-71e0-4696-8818-32b80bc3ad32"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fone:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="10" y="38" width="533" height="1" uuid="a2e24e8e-d6b0-4d1b-8016-55d445b63f5a"/>
+			</line>
+			<staticText>
+				<reportElement x="228" y="18" width="100" height="20" uuid="3b666992-87f1-464a-adeb-d56c3cd9df5d"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sexo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="18" width="100" height="20" uuid="79d6f1e3-6537-4166-b4a3-d0cc9188d345"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="37" splitType="Stretch">
+			<textField>
+				<reportElement x="14" y="17" width="100" height="20" uuid="bc779cdc-303e-4560-bd18-a0903928df76"/>
+				<textFieldExpression><![CDATA[$F{NOME_PESSOA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="228" y="17" width="100" height="20" uuid="df4709f0-f848-4a22-965c-06a84e97a728"/>
+				<textFieldExpression><![CDATA[$F{SEXO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="412" y="17" width="100" height="20" uuid="dbd18c3e-6f1a-4ed9-b5fd-d75700257266"/>
+				<textFieldExpression><![CDATA[$F{FONE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

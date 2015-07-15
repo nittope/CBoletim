@@ -18,6 +18,7 @@ import javax.swing.JComboBox;
 import br.com.oods.cboletim.dao.PessoaDAO;
 import br.com.oods.cboletim.dao.PessoaDAOJDBC;
 import br.com.oods.cboletim.model.Pessoa;
+import javax.swing.JPasswordField;
 
 /**
  * Tela para incluir o registro de <code>Pessoa</code>.
@@ -33,6 +34,8 @@ public class IncluirPessoaFrame extends JFrame {
 	private JFormattedTextField tfFone;
         private JComboBox combosexo;	
 	private JTextField tfEndereco;
+        private JTextField tfLogin;
+        private JPasswordField tfSenha;
 	private JFormattedTextField tfId;        
 	private JButton bSalvar;
 	private JButton bCancelar;
@@ -107,6 +110,8 @@ public class IncluirPessoaFrame extends JFrame {
 		//tfSexo = new JTextField();
 		tfEndereco = new JTextField();
 		tfFone = new JFormattedTextField();
+                tfLogin = new JTextField();
+                tfSenha = new JPasswordField();
 		tfId = new JFormattedTextField();
 		tfId.setEnabled(false);
                 
@@ -129,6 +134,10 @@ public class IncluirPessoaFrame extends JFrame {
 		painelEditarPessoa.add(tfEndereco);
 		painelEditarPessoa.add(new JLabel("Telefone:"));
 		painelEditarPessoa.add(tfFone);
+                painelEditarPessoa.add(new JLabel("Login:"));
+		painelEditarPessoa.add(tfLogin);
+		painelEditarPessoa.add(new JLabel("Senha:"));
+		painelEditarPessoa.add(tfSenha);
 		painelEditarPessoa.add(new JLabel("Id:"));
 		painelEditarPessoa.add(tfId);
 		
@@ -142,6 +151,9 @@ public class IncluirPessoaFrame extends JFrame {
 		combosexo.setSelectedIndex(0);
 		tfEndereco.setText("");
 		tfFone.setText("");
+                tfLogin.setText("");
+		tfSenha.setText("");
+                
 	}
 	
 	private void populaTextFields(Pessoa p){
@@ -152,7 +164,9 @@ public class IncluirPessoaFrame extends JFrame {
 		//tfSexo.setText(p.getSexo());
                 combosexo.setSelectedItem(p.getSexo());
 		tfFone.setValue(p.getFone());
-                tfEndereco.setText(p.getEndereco());		
+                tfEndereco.setText(p.getEndereco());	
+                tfLogin.setText(p.getLogin());
+                tfSenha.setText(p.getSenha());
 	}
 	
 	protected Integer getIdPessoa(){
@@ -170,6 +184,8 @@ public class IncluirPessoaFrame extends JFrame {
                 sb.append(combosexo.getSelectedItem()== null || "".equals(combosexo.getSelectedItem()) ? "Sexo, " : "");
                 sb.append(tfEndereco.getText() == null || "".equals(tfEndereco.getText().trim()) ? "Endereço, " : "");
 		sb.append(tfFone.getText() == null || "".equals(tfFone.getText().trim()) ? "Telefone, " : "");
+                sb.append(tfLogin.getText() == null || "".equals(tfLogin.getText().trim()) ? "Login, " : "");
+		sb.append(tfSenha.getText() == null || "".equals(tfSenha.getText().trim()) ? "Senha, " : "");
 		
 		if (!sb.toString().isEmpty()) {
 			sb.delete(sb.toString().length()-2, sb.toString().length());
@@ -196,13 +212,15 @@ public class IncluirPessoaFrame extends JFrame {
                 String sexo = itemsexo.toString();
                 String endereco = tfEndereco.getText().trim();
                 String fone = tfFone.getText().trim();
+                String login = tfLogin.getText().trim();
+                String senha = tfSenha.getText().trim();
 		
 		if (nome_pessoa.length() < 2) {
 			throw new RuntimeException("O nome deve conter no mínimo 2 caracteres!");
 		}	
 		
 		
-		return new Pessoa(null, tipoacesso_pessoa, nome_pessoa, sexo, endereco, fone);
+		return new Pessoa(null, tipoacesso_pessoa, nome_pessoa, sexo, endereco, fone, login, senha);
 	}
 	
 	public void setPessoa(Pessoa p){

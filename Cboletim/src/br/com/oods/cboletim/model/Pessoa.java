@@ -14,19 +14,26 @@ public class Pessoa {
 	protected String sexo;
 	protected String endereco;
 	protected String fone;
+        protected String login;
+	protected String senha;
+
+    
+        
 	
 	
 	
 	public Pessoa(){
 	}
 	
-	public Pessoa(Integer id_pessoa, Integer tipoacesso_pessoa, String nome_pessoa, String sexo, String endereco, String fone) {
+	public Pessoa(Integer id_pessoa, Integer tipoacesso_pessoa, String nome_pessoa, String sexo, String endereco, String fone, String login, String senha) {
 		this.id_pessoa = id_pessoa;
 		this.tipoacesso_pessoa = tipoacesso_pessoa;
 		this.nome_pessoa = nome_pessoa;
                 this.sexo = sexo;
 		this.endereco = endereco;
 		this.fone = fone;
+                this.login = login;
+		this.senha = senha;
 	}
 	//Getters and Setters
 	public Integer getId_pessoa() {
@@ -75,6 +82,22 @@ public class Pessoa {
 	public void setFone(String fone) {
 		this.fone = fone;
 	}
+        
+        public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 
 	
 }

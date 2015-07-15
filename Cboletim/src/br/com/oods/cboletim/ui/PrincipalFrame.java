@@ -4,6 +4,23 @@
  * and open the template in the editor.
  */
 package br.com.oods.cboletim.ui;
+import br.com.oods.cboletim.dao.*;
+import static br.com.oods.cboletim.dao.AlunoDAOJDBC.GET_ALL_ALUNOS;
+import static br.com.oods.cboletim.dao.PessoaDAOJDBC.GET_ALL_PESSOAS;
+import static br.com.oods.cboletim.dao.AlunoDAOJDBC.log;
+import br.com.oods.cboletim.exception.PersistenceException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRResultSetDataSource;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
+import org.apache.log4j.Logger;
 
 
 /**
@@ -11,7 +28,7 @@ package br.com.oods.cboletim.ui;
  * @author Vinicius
  */
 public class PrincipalFrame extends javax.swing.JFrame {
-
+   
     /**
      * Creates new form PrincipalFrame
      */
@@ -32,6 +49,9 @@ public class PrincipalFrame extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jmenrelalunos = new javax.swing.JMenuItem();
+        jmrelusuarios = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,6 +74,26 @@ public class PrincipalFrame extends javax.swing.JFrame {
         jMenu1.add(jMenuItem2);
 
         jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Relatórios");
+
+        jmenrelalunos.setText("Alunos");
+        jmenrelalunos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmenrelalunosActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmenrelalunos);
+
+        jmrelusuarios.setText("Usuários");
+        jmrelusuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmrelusuariosActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmrelusuarios);
+
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -81,10 +121,72 @@ public class PrincipalFrame extends javax.swing.JFrame {
        frame.setVisible(true);  // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jmenrelalunosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenrelalunosActionPerformed
+        // TODO add your handling code here:
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try{
+            AlunoDAO dao = new AlunoDAOJDBC();
+            conn = ConnectionManager.getConnection();
+            stmt = AlunoDAOJDBC.createStatementWithLog(conn, GET_ALL_ALUNOS);
+            rs = stmt.executeQuery();
+        }catch(SQLException e) {
+                    String errorMsg = "Erro ao consultar Aluno por nome!";
+                    log.error(errorMsg, e);
+                    throw new PersistenceException(errorMsg, e);
+        }                
+        
+        try{
+            
+            JRResultSetDataSource relatResul = new JRResultSetDataSource(rs);
+            JasperPrint jpPrint = JasperFillManager.fillReport("ireport/RelatorioBrancoAlunos.jasper", new HashMap(), relatResul);
+            JasperViewer jv = new JasperViewer(jpPrint);
+            jv.setVisible(true);
+        }catch (JRException ex){
+            JOptionPane.showMessageDialog(rootPane, "Erro ao chamar relatório! \nErro: "+ ex);
+        }finally {
+                    ConnectionManager.closeAll(conn, stmt, rs);
+            }
+        
+        
+    }//GEN-LAST:event_jmenrelalunosActionPerformed
+
+    private void jmrelusuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmrelusuariosActionPerformed
+        // TODO add your handling code here:
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try{
+            PessoaDAO dao = new PessoaDAOJDBC();
+            conn = ConnectionManager.getConnection();
+            stmt = PessoaDAOJDBC.createStatementWithLog(conn, GET_ALL_PESSOAS);
+            rs = stmt.executeQuery();
+        }catch(SQLException e) {
+                    String errorMsg = "Erro ao consultar Usuario por nome!";
+                    log.error(errorMsg, e);
+                    throw new PersistenceException(errorMsg, e);
+        }                
+        
+        try{
+            
+            JRResultSetDataSource relatResul = new JRResultSetDataSource(rs);
+            JasperPrint jpPrint = JasperFillManager.fillReport("ireport/RelatorioBrancoUsuarios.jasper", new HashMap(), relatResul);
+            JasperViewer jv = new JasperViewer(jpPrint);
+            jv.setVisible(true);
+        }catch (JRException ex){
+            JOptionPane.showMessageDialog(rootPane, "Erro ao chamar relatório! \nErro: "+ ex);
+        }finally {
+                    ConnectionManager.closeAll(conn, stmt, rs);
+            }
+        
+        
+    }//GEN-LAST:event_jmrelusuariosActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public  void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -118,8 +220,11 @@ public class PrincipalFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jmenrelalunos;
+    private javax.swing.JMenuItem jmrelusuarios;
     // End of variables declaration//GEN-END:variables
 }

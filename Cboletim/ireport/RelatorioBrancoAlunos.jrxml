@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioBrancoAlunos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="aad2531d-bacd-4114-9378-888b0b1a4839">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[select * from aluno]]>
+	</queryString>
+	<field name="NOME_ALUNO" class="java.lang.String"/>
+	<field name="SEXO" class="java.lang.String"/>
+	<field name="DATANASCIMENTO" class="java.sql.Timestamp"/>
+	<group name="NOME_ALUNO">
+		<groupExpression><![CDATA[$F{NOME_ALUNO}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="67" splitType="Stretch">
+			<staticText>
+				<reportElement x="98" y="28" width="429" height="39" uuid="06093606-e12a-4b45-ac49-6f35661e915a"/>
+				<textElement textAlignment="Center">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[CBOLETIM - EDUCANDÁRIO DE PALMARES]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement x="14" y="27" width="529" height="28" uuid="ceb27485-d9cf-46a3-87c5-c2305b5dc829"/>
+				<textElement textAlignment="Center">
+					<font size="22"/>
+				</textElement>
+				<text><![CDATA[Lista de Alunos]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="412" y="60" width="80" height="20" uuid="cd029cf4-9594-4756-97cb-9b4d8cba93f5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="503" y="60" width="40" height="20" uuid="b404a84a-6f5b-4602-bded-b1ba3e401f98"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="43" splitType="Stretch">
+			<staticText>
+				<reportElement x="14" y="18" width="100" height="20" uuid="8c3fe4b8-df15-4e76-87ce-f4f9f3ed6351"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="228" y="18" width="100" height="20" uuid="133332de-1813-4852-9611-9cf1f4ced2e5"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sexo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="412" y="18" width="100" height="20" uuid="d71780af-c8f1-4711-99a6-e817c904ec02"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de Nasc:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="10" y="38" width="533" height="1" uuid="cfc6e240-197e-4c3c-87aa-304f917a8fa7"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="14" y="8" width="100" height="20" uuid="19870639-5db2-4ce9-bb9b-9c74e6aa72ac"/>
+				<textFieldExpression><![CDATA[$F{NOME_ALUNO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="228" y="8" width="100" height="20" uuid="5a135881-fec9-4d07-bb0d-320e86d93225"/>
+				<textFieldExpression><![CDATA[$F{SEXO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="412" y="8" width="100" height="20" uuid="2d2f3e9e-e81e-4526-8bd4-ce837b28572f"/>
+				<textFieldExpression><![CDATA[$F{DATANASCIMENTO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="455" y="34" width="100" height="20" uuid="ec594ea5-0f45-4a4e-826c-81e46a305ae8"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="344" y="34" width="100" height="20" uuid="81cac3fa-f1a0-4513-b0d4-6e5303fea4d1"/>
+				<text><![CDATA[Total de páginas:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

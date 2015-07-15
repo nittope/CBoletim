@@ -26,11 +26,11 @@ public class AlunoDAOJDBC  implements AlunoDAO{
     private final static String INSERT_ALUNO = "INSERT INTO aluno (nome_aluno,sexo,datanascimento,nomemae,nomepai,endereco,fone) VALUES (?,?,?,?,?,?,?)";
     private final static String UPDATE_ALUNO = "UPDATE aluno SET nome_aluno = ?,sexo = ?,datanascimento = ?,nomemae = ?,nomepai = ?,endereco = ?,fone = ? WHERE num_matricula = ?";
     private final static String DELETE_ALUNO = "DELETE FROM aluno WHERE num_matricula = ?";
-    private final static String GET_ALL_ALUNOS = "SELECT * FROM aluno";
+    public final static String GET_ALL_ALUNOS = "SELECT * FROM aluno";
     private final static String GET_ALUNO_BY_NOME_ALUNO = "SELECT * FROM aluno WHERE nome_aluno like ?";
     private final static String GET_ALUNO_BY_NUM_MATRICULA = "SELECT * FROM aluno WHERE num_matricula = ?";
 
-    private static Logger log = Logger.getLogger(AlunoDAOJDBC.class);
+    public static Logger log = Logger.getLogger(AlunoDAOJDBC.class);
 
     @Override
     public void init() throws PersistenceException {
@@ -231,7 +231,7 @@ public class AlunoDAOJDBC  implements AlunoDAO{
             return lista;
     }
 
-    private static PreparedStatement createStatementWithLog(Connection conn, String sql) throws SQLException{
+    public static PreparedStatement createStatementWithLog(Connection conn, String sql) throws SQLException{
             if (conn == null)
                     return null;
 
